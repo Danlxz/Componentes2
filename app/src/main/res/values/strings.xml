@@ -2,6 +2,6 @@
     <string name="app_name">Componentes 2</string>
     <string name="etiquetaBuscar">Escribe para buscar ...</string>
     <string name="tituloCard">Simple Title Text</string>
-    <string name="fechaCard">Simple Title Text</string>
+    <string name="fechaCard">Text fecha</string>
     <string name="contentCard">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam asperiores aspernatur delectus, deserunt ea eius esse, exercitationem illo natus necessitatibus odit, omnis perspiciatis sed tempora temporibus tenetur voluptatem! Enim, in.</string>
 </resources>

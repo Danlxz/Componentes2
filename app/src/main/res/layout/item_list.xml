@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="20dp">
 
     <RelativeLayout
         android:id="@+id/relativeCard"
         android:background="@drawable/card_bg"
         android:paddingBottom="20dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/title"
-            android:layout_marginStart="40dp"
-            android:layout_marginLeft="40dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginLeft="50dp"
             android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -29,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_alignRight="@id/title"
             android:layout_alignEnd="@id/title"
-            android:text="Text view"
+            android:text="@string/fechaCard"
             android:textColor="@color/colorText"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
@@ -43,8 +45,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/title"
-            android:layout_marginStart="40dp"
-            android:layout_marginLeft="40dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginLeft="50dp"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="10dp"
@@ -57,12 +59,9 @@
 
     <ImageView
         android:id="@+id/imgUser"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:background="@mipmap/ic_launcher"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         />
 
 </FrameLayout>
