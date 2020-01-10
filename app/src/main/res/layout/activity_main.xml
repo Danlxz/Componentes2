@@ -8,19 +8,25 @@
     android:paddingTop="20dp"
     tools:context=".MainActivity"
     android:id="@+id/root_layout"
-    android:background="@color/colorPrimary">
+    android:background="@color/colorThemeWhite">
 
     <EditText
         android:id="@+id/editSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/etiquetaBuscar"/>
+        android:textColor="@color/colorText"
+        android:hint="@string/etiquetaBuscar"
+        android:background="@drawable/search_style"
+        android:drawableLeft="@drawable/ic_search_24dp"
+        android:drawableStart="@drawable/ic_search_24dp"
+        android:drawablePadding="10dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/editSearch"/>
+        android:layout_below="@id/editSearch"
+        android:layout_marginTop="20dp"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"

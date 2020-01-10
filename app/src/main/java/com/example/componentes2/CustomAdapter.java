@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -12,19 +14,52 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
+public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> implements Filterable {
 
     // Dataset que son los datos que se pretende mostrar en RecyclerView
     private Context context;
     private List<Item> dataset;
+    private List<Item> dataFiltered;
     boolean isDark = false;
 
     public CustomAdapter(Context context, List<Item> dataset, boolean isDark) {
         this.context = context;
         this.dataset = dataset;
         this.isDark = isDark;
+        this.dataFiltered = dataset;
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String key = constraint.toString();
+                if (key.isEmpty()){
+                    dataFiltered = dataset;
+                }else{
+                    List<Item> auxFilter = new ArrayList<>();
+                    for (Item i : dataset){
+                        if (i.getTitle().toLowerCase().contains(key.toLowerCase())){
+                            auxFilter.add(i);
+                        }
+                    }
+                    dataFiltered = auxFilter;
+                }
+                FilterResults fs = new FilterResults();
+                fs.values = dataFiltered;
+                return fs;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                dataFiltered = (List<Item>) results.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
     // Clase interna que permite obtener referencias de los componentes visuales de cada elemento de la lista
@@ -67,10 +102,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         // - obtenemos un elemento del dataset según su posición
         // - reemplazamos el contenido de los views según tales datos
-        holder.imguser.setImageResource(dataset.get(position).getUserPhoto());
-        holder.titulo.setText(dataset.get(position).getTitle());
-        holder.fecha.setText(dataset.get(position).getDate());
-        holder.contenido.setText(dataset.get(position).getContent());
+        holder.imguser.setImageResource(dataFiltered.get(position).getUserPhoto());
+        holder.titulo.setText(dataFiltered.get(position).getTitle());
+        holder.fecha.setText(dataFiltered.get(position).getDate());
+        holder.contenido.setText(dataFiltered.get(position).getContent());
 
         // Animacion de la UI de cada elemento del RecyclerView
         holder.imguser.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_transition));
@@ -83,7 +118,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
     // Puede ser más complejo (por ejemplo si implementamos filtros o búsquedas)
     @Override
     public int getItemCount() {
-        return dataset.size();
+        return dataFiltered.size();
     }
 
 }

@@ -6,8 +6,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -26,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionButton fabSwitcher;
     boolean isDark = false;
     RelativeLayout rootLayout;
+    EditText txtSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +48,11 @@ public class MainActivity extends AppCompatActivity {
         // Inicializamos la libreria lorem
         lorem = new LoremIpsum();
 
+        // Inicializamos la implementacion del RecyclerView y los demas componentes principales
+        recycler = findViewById(R.id.recyclerMain);
         fabSwitcher = findViewById(R.id.fab);
         rootLayout = findViewById(R.id.root_layout);
-        // Inicializamos la implementacion del RecyclerView
-        recycler = findViewById(R.id.recyclerMain);
+        txtSearch = findViewById(R.id.editSearch);
 
         // Se puede llenar por una bd o con firebase
         dataset = new ArrayList<>();
@@ -67,8 +72,10 @@ public class MainActivity extends AppCompatActivity {
         isDark = getThemeState();
         if (isDark){
             rootLayout.setBackgroundColor(getResources().getColor(R.color.colorThemeBlack));
+            txtSearch.setBackgroundResource(R.drawable.search_style_black);
         }else{
             rootLayout.setBackgroundColor(getResources().getColor(R.color.colorThemeWhite));
+            txtSearch.setBackgroundResource(R.drawable.search_style);
         }
 
         // Se usa para mejorar el rendimiento, si sabemos que el contenido no va afectar el tamaño del recyclerview
@@ -87,12 +94,31 @@ public class MainActivity extends AppCompatActivity {
                 isDark = !isDark;
                 if (isDark){
                     rootLayout.setBackgroundColor(getResources().getColor(R.color.colorThemeBlack));
+                    txtSearch.setBackgroundResource(R.drawable.search_style_black);
                 }else{
                     rootLayout.setBackgroundColor(getResources().getColor(R.color.colorThemeWhite));
+                    txtSearch.setBackgroundResource(R.drawable.search_style);
                 }
                 adapter = new CustomAdapter(getApplicationContext(), dataset, isDark);
                 recycler.setAdapter(adapter);
                 saveThemeState(isDark);
+            }
+        });
+
+        txtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                adapter.getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
     }
