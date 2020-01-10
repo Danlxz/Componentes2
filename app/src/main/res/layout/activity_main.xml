@@ -3,8 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="20dp"
-    tools:context=".MainActivity">
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingTop="20dp"
+    tools:context=".MainActivity"
+    android:id="@+id/root_layout"
+    android:background="@color/colorPrimary">
 
     <EditText
         android:id="@+id/editSearch"
@@ -17,6 +21,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/editSearch"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/recyclerMain"
+        android:layout_alignRight="@id/recyclerMain"
+        android:layout_alignBottom="@id/recyclerMain"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="35dp"
+        android:src="@drawable/ic_brightness_2_white_24dp"/>
 
 
 </RelativeLayout>

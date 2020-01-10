@@ -2,9 +2,12 @@
 <resources>
     <color name="colorPrimary">#fff</color>
     <color name="colorPrimaryDark">#fff</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#258bd6</color>
     <color name="colorTitle">#728CFF</color>
     <color name="colorText">#999696</color>
-    <color name="colorStart">#DBE1E6</color>
+    <color name="colorCard">#DBE1E6</color>
+    <color name="colorThemeWhite">#fff</color>
+    <color name="colorThemeBlack">#323F50</color>
+    <color name="colorCardBlack">#314257</color>
 
 </resources>
